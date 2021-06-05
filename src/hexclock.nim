@@ -1,4 +1,4 @@
-import std/times, std/unicode
+import std/times
 import sdl2, sdl2/ttf
 import private/hex
 

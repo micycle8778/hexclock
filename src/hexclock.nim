@@ -5,8 +5,8 @@ import private/hex
 doAssert sdl2.init(INIT_EVERYTHING) == SdlSuccess
 doAssert ttfInit() == SdlSuccess
 
-const font_data = slurp"../Comfortaa-Light.ttf".cstring
-let font_RWops = font_data.rwFromConstMem(font_data.len)
+const font_data = slurp"../Comfortaa-Light.ttf"
+let font_RWops = rwFromConstMem(font_data.cstring, font_data.len)
 let font = font_RWops.openFontRW(0, 64)
 
 var window: WindowPtr
@@ -46,7 +46,7 @@ while running:
   doAssert renderer.getRendererOutputSize(addr window_w, addr window_h) == 0
   
   # Render some text
-  let surface = renderTextBlended(font, '#' & s, color(255, 255, 255, 255))
+  let surface = renderTextBlended(font, ('#' & s).cstring, color(255, 255, 255, 255))
   let texture = createTextureFromSurface(renderer, surface)
   
   # Get the size of the rendered text
